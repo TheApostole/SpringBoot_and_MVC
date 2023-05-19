@@ -10,4 +10,9 @@ public interface EmployeeRepository {
     Employee getMinSalary();
     Employee getMaxSalary();
     List<Employee> getHighSalary();
+    void createEmployee(Employee employee);
+    List<Employee> editEmployee(Integer id, String name, Integer salary);
+    Employee getEmployeeByID(Integer id);
+    void deleteEmployeeByID(Integer id);
+    List<Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary);
 }

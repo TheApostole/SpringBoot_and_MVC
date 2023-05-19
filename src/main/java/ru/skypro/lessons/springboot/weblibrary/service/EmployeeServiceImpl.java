@@ -25,4 +25,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getHighSalary() {
         return employeeRepository.getHighSalary();
     }
+    public void createEmployee(Employee employee) {
+        employeeRepository.createEmployee(employee);
+    }
+    public List<Employee> editEmployee(Integer id, String name, Integer salary){
+       return employeeRepository.editEmployee(id, name, salary);
+    }
+    public Employee getEmployeeByID(Integer id) {
+        return employeeRepository.getEmployeeByID(id);
+    }
+    public void deleteEmployeeByID(Integer id) {
+        employeeRepository.deleteEmployeeByID(id);
+    }
+    public List<Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary){
+        return employeeRepository.getEmployeesWhoseSalaryIsHigherThanTheParameter(salary);
+    }
 }
