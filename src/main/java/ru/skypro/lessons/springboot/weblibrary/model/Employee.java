@@ -11,15 +11,8 @@ import javax.management.ConstructorParameters;
 public class Employee {
     private String name;
     private int salary;
-//    private static int count;
     private int id;
 
     public Employee() {
-
     }
-//    public Employee(String name, int salary) {
-//        this.name = name;
-//        this.salary = salary;
-//        id = ++count;
-//    }
 }

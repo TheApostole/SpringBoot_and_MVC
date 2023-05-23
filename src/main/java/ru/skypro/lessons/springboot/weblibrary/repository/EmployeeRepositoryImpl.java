@@ -50,11 +50,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return employees;
     }
     public void createEmployee(Employee employee){
-        for (Employee emp : employeeList) {
-            if (emp == null) {
                 employeeList.add(employee);
-            }
-        }
     }
     public List<Employee> editEmployee(Integer id, String name, Integer salary) {
     for (Employee item : employeeList) {
