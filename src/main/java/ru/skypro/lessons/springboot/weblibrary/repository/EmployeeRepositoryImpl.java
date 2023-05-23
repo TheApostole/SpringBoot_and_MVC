@@ -9,12 +9,12 @@ import static java.util.Comparator.comparingInt;
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-
      List<Employee> employeeList = List.of(
             new Employee("Санёк", 94_000, 1),
             new Employee("Дикий", 175_000, 2),
             new Employee("Алексей", 45_000, 3),
             new Employee("Алёна", 106_000, 4));
+
 
     @Override
     public Integer getSumSalary() {
