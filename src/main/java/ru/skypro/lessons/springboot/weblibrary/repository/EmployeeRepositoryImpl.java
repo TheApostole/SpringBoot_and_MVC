@@ -9,11 +9,12 @@ import static java.util.Comparator.comparingInt;
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-    private final List<Employee> employeeList = List.of(
-            new Employee("Санёк", 94_000),
-            new Employee("Дикий", 175_000),
-            new Employee("Алексей", 45_000),
-            new Employee("Алёна", 106_000));
+     List<Employee> employeeList = List.of(
+            new Employee("Санёк", 94_000, 1),
+            new Employee("Дикий", 175_000, 2),
+            new Employee("Алексей", 45_000, 3),
+            new Employee("Алёна", 106_000, 4));
+
 
     @Override
     public Integer getSumSalary() {
@@ -48,10 +49,36 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
         return employees;
     }
-
-
-
-
-
-
+    public void createEmployee(Employee employee){
+                employeeList.add(employee);
+    }
+    public List<Employee> editEmployee(Integer id, String name, Integer salary) {
+    for (Employee item : employeeList) {
+        if (id == item.getId()) {
+            item.setName(name);
+            item.setSalary(salary);
+        }
+    }
+    return employeeList;
+    }
+    public Employee getEmployeeByID(Integer id) {
+        Employee employee = new Employee();
+        for (Employee empl : employeeList) {
+            if (id == empl.getId())
+                employee = empl;
+        }
+        return employee;
+    }
+    public void deleteEmployeeByID(Integer id) {
+        employeeList.removeIf(employee -> employee.getId() == id);
+    }
+    public List <Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary) {
+        List<Employee> employees = new ArrayList<>();
+        for (Employee employee : employeeList) {
+            if(employee.getSalary() > salary) {
+                employees.add(employee);
+            }
+        }
+        return employees;
+    }
 }
