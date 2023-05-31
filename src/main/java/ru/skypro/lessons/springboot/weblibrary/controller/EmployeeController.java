@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import lombok.Getter;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
+import ru.skypro.lessons.springboot.weblibrary.model.Position;
+import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeServiceImpl;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EmployeeBDService employeeBDService;
 
     @GetMapping("/salary/sum")
     public Integer getSumSalaryEmployees() {
@@ -52,5 +55,21 @@ public class EmployeeController {
     @GetMapping("/salaryHigherThan")
     public List<Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(@RequestParam("salary") Integer salary) {
         return employeeService.getEmployeesWhoseSalaryIsHigherThanTheParameter(salary);
+    }
+    @GetMapping("/withHighestSalary")
+    public Employee getEmployeeWithHighestSalary() {
+        return employeeBDService.getEmployeeWithHighestSalary();
+    }
+    @GetMapping("/")
+    public Position getEmployeeByPositionName(String name) {
+        return employeeBDService.getEmployeeByPositionName(name);
+    }
+    @GetMapping("/{id}/fullInfo")
+    public Employee getEmployeesById(int id) {
+        return employeeBDService.getEmployeeById(id);
+    }
+    @GetMapping("/page")
+    public List<Employee> getEmployeeWithPaging(int pageIndex, int unitPerPage) {
+        return employeeBDService.getEmployeeWithPaging(pageIndex, unitPerPage);
     }
 }

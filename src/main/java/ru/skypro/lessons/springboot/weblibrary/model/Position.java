@@ -1,24 +1,25 @@
 package ru.skypro.lessons.springboot.weblibrary.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @Entity
-@Table (name = "employee")
-public class Employee {
-
+@Table(name = "position")
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private Integer salary;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "position_id")
-    private Position position;
-    public Employee() {
+    @Column(name = "position_name")
+    private String position_name;
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
+    private List<Employee> employeeList;
+    public Position() {
     }
 }
