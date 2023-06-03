@@ -1,14 +1,16 @@
 package ru.skypro.lessons.springboot.weblibrary.dto;
-
 import lombok.Getter;
 import lombok.Setter;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class EmployeeDTO {
+public class EmployeeDTO implements Serializable {
     private Integer id;
     private String name;
     private Integer salary;
+    private String position_name;
 
     public static EmployeeDTO fromEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
