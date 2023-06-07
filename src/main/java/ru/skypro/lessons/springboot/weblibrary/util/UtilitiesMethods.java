@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 public class UtilitiesMethods {
+
     public static String readTextFromFile(String fileName) {
         Path path = Paths.get(fileName);
         try {
@@ -16,6 +17,7 @@ public class UtilitiesMethods {
             return "";
         }
     }
+
     public static void writeTextToFile(String text, String fileName) {
         Path path = Paths.get(fileName);
         try {
@@ -24,4 +26,5 @@ public class UtilitiesMethods {
             ioException.printStackTrace();
         }
     }
+
 }

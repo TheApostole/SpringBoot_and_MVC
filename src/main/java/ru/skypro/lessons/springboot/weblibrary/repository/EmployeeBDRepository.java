@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import java.util.List;
+
 public interface EmployeeBDRepository extends CrudRepository<Employee, Integer> {
 
     @Query(value = "SELECT new ru.skypro.lessons.springboot.weblibrary.model.projections." +
@@ -20,6 +21,7 @@ public interface EmployeeBDRepository extends CrudRepository<Employee, Integer> 
     List<Employee> findByName(String name);
 
     Page<Employee> findAll(Pageable employeeOfConcretePage);
+
     @Query(value = "SELECT department FROM employee GROUP BY department",
             nativeQuery = true)
     Integer sortDepartment();
@@ -27,13 +29,17 @@ public interface EmployeeBDRepository extends CrudRepository<Employee, Integer> 
     @Query(value = "SELECT AVG(salary) AS average_salary FROM employee GROUP BY department",
             nativeQuery = true)
     Integer averageSalary();
+
     @Query(value = "SELECT min(salary) AS min_salary FROM employee GROUP BY department",
             nativeQuery = true)
     Integer minSalary();
+
     @Query(value = "SELECT max(salary) AS max_salary FROM employee GROUP BY department",
             nativeQuery = true)
     Integer maxSalary();
+
     @Query(value = "SELECT COUNT AS count_employee FROM employee GROUP BY department",
             nativeQuery = true)
     Integer countEmployeeInDepartment();
+
 }

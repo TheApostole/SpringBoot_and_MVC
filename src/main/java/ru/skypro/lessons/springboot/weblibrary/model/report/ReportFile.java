@@ -9,7 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table (name = "report")
-public class SomeFile {
+
+public class ReportFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +18,8 @@ public class SomeFile {
     @Lob
     @Column(name = "file_name", columnDefinition = "CLOB")
     private String fileName;
-    public SomeFile() {
 
+    public ReportFile() {
     }
+
 }

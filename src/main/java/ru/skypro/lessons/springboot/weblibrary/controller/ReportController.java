@@ -1,10 +1,8 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
-import ru.skypro.lessons.springboot.weblibrary.service.SomeFileService;
-
+import ru.skypro.lessons.springboot.weblibrary.service.ReportFileService;
 import java.io.IOException;
 
 @RestController
@@ -13,15 +11,15 @@ import java.io.IOException;
 @AllArgsConstructor
 public class ReportController {
 
-    private final SomeFileService someFileService;
+    private final ReportFileService reportFileService;
 
     @PostMapping("/")
     public Long generatesAndSavesJsonFile() throws IOException {
-        return someFileService.generatesAndSavesJsonFile();
-    }
-    @GetMapping("/{id}")
-    public String getSomeFileByID(@PathVariable Integer id) {
-        return someFileService.getSomeFileById(id);
+        return reportFileService.generatesAndSavesJsonFile();
     }
 
+    @GetMapping("/{id}")
+    public String getSomeFileByID(@PathVariable Integer id) {
+        return reportFileService.getSomeFileById(id);
+    }
 }

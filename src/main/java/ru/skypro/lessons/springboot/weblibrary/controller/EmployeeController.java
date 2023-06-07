@@ -1,19 +1,14 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.Position;
-import ru.skypro.lessons.springboot.weblibrary.model.report.Report;
-import ru.skypro.lessons.springboot.weblibrary.model.report.SomeFile;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
-import ru.skypro.lessons.springboot.weblibrary.service.SomeFileService;
+import ru.skypro.lessons.springboot.weblibrary.service.ReportFileService;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,7 +21,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeBDService employeeBDService;
 
-    private final SomeFileService someFileService;
+    private final ReportFileService someFileService;
 
     @GetMapping("/salary/sum")
     public Integer getSumSalaryEmployees() {

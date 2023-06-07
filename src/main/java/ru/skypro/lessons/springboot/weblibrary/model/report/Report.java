@@ -3,13 +3,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class Report {
 
-    private String departmentName;
+    private Integer department;
     private Integer numberOfEmployees;
     private Integer maximumSalary;
     private Integer minimumWage;
