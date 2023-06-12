@@ -1,5 +1,4 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.MediaType;
@@ -9,7 +8,6 @@ import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class AdminController {
     }
 
     @PutMapping("/{id}")
-    public List<Employee> editEmployee(@PathVariable Integer id, String name, Integer salary) {
+    public List<Employee> editEmployee(@PathVariable Integer id,@PathVariable String name,@PathVariable Integer salary) {
         return employeeService.editEmployee(id, name, salary);
     }
 
@@ -89,7 +87,7 @@ public class AdminController {
     }
 
     @GetMapping("/page")
-    public List<Employee> getEmployeeWithPaging(@RequestParam int pageIndex, int unitPerPage) {
+    public List<Employee> getEmployeeWithPaging(@RequestParam int pageIndex,@RequestParam int unitPerPage) {
         return employeeBDService.getEmployeeWithPaging(pageIndex, unitPerPage);
     }
 

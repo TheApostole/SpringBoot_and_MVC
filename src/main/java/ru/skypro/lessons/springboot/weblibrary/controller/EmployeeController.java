@@ -1,15 +1,11 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import lombok.Getter;
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
-import ru.skypro.lessons.springboot.weblibrary.service.ReportFileService;
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -67,7 +63,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/page")
-    public List<Employee> getEmployeeWithPaging(@RequestParam int pageIndex, int unitPerPage) {
+    public List<Employee> getEmployeeWithPaging(@RequestParam int pageIndex,@RequestParam int unitPerPage) {
         return employeeBDService.getEmployeeWithPaging(pageIndex, unitPerPage);
     }
 
