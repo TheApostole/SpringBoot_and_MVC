@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/employees")
 @Getter
 @AllArgsConstructor
+
 public class EmployeeController {
 
     private final EmployeeService employeeService;

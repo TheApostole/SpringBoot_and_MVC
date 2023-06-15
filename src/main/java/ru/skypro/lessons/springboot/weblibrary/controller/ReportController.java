@@ -9,6 +9,7 @@ import java.io.IOException;
 @RequestMapping("/report")
 @Getter
 @AllArgsConstructor
+
 public class ReportController {
 
     private final ReportFileService reportFileService;
