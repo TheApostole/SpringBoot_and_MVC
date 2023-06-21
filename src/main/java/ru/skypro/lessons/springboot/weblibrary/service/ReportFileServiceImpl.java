@@ -1,6 +1,8 @@
 package ru.skypro.lessons.springboot.weblibrary.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.weblibrary.model.report.Report;
@@ -17,10 +19,13 @@ import java.util.Optional;
 
 public class ReportFileServiceImpl implements ReportFileService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportFileServiceImpl.class);
     private final EmployeeBDRepository employeeBDRepository;
     private final ReportFileRepository reportFileRepository;
+
     @Override
     public Long generatesAndSavesJsonFile() throws IOException {
+        LOGGER.info("Был вызван метод генерации и сохранения Json - файла ");
         String fileName = "report.json";
         File file = new File(fileName);
         file.createNewFile();
@@ -32,14 +37,17 @@ public class ReportFileServiceImpl implements ReportFileService {
         ReportFile reportFile = new ReportFile();
         reportFile.setFileName(fileName);
         reportFileRepository.save(reportFile);
+        LOGGER.debug("Успешно");
         return reportFile.getId();
     }
 
     @Override
     public String getSomeFileById(int id) {
+        LOGGER.info("Был вызван метод для нахождения файла по id = {}", id);
         Optional<ReportFile> employeeOptional = reportFileRepository.findById(id);
         employeeOptional.orElseThrow(() -> new IncorrectResultSizeDataAccessException(id));
         ReportFile someFile = employeeOptional.get();
+        LOGGER.debug("Успешно");
         return someFile.getFileName();
     }
 
