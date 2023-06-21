@@ -19,13 +19,13 @@ import java.util.Optional;
 
 public class ReportFileServiceImpl implements ReportFileService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ReportFileServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportFileServiceImpl.class);
     private final EmployeeBDRepository employeeBDRepository;
     private final ReportFileRepository reportFileRepository;
 
     @Override
     public Long generatesAndSavesJsonFile() throws IOException {
-        logger.info("Был вызван метод генерации и сохранения Json - файла ");
+        LOGGER.info("Был вызван метод генерации и сохранения Json - файла ");
         String fileName = "report.json";
         File file = new File(fileName);
         file.createNewFile();
@@ -37,17 +37,17 @@ public class ReportFileServiceImpl implements ReportFileService {
         ReportFile reportFile = new ReportFile();
         reportFile.setFileName(fileName);
         reportFileRepository.save(reportFile);
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         return reportFile.getId();
     }
 
     @Override
     public String getSomeFileById(int id) {
-        logger.info("Был вызван метод для нахождения файла по id = " + id);
+        LOGGER.info("Был вызван метод для нахождения файла по id = {}", id);
         Optional<ReportFile> employeeOptional = reportFileRepository.findById(id);
         employeeOptional.orElseThrow(() -> new IncorrectResultSizeDataAccessException(id));
         ReportFile someFile = employeeOptional.get();
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         return someFile.getFileName();
     }
 

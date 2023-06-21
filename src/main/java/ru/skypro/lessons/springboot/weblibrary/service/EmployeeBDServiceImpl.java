@@ -24,49 +24,49 @@ import java.util.Optional;
 public class EmployeeBDServiceImpl implements EmployeeBDService {
 
     private final EmployeeBDRepository employeeBDRepository;
-    private static final Logger logger = LoggerFactory.getLogger(ReportFileServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportFileServiceImpl.class);
 
     @Override
     public Position getEmployeeByPositionName(String name) {
-        logger.info("Был вызван метод для получения списка сотрудников на должности " + name);
+        LOGGER.info("Был вызван метод для получения списка сотрудников на должности {}", name);
         if (name.equals(" ")) {
             employeeBDRepository.findAllEmployeeFullInfo();
         }
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         return employeeBDRepository.findByName(name).get(0).getPosition();
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-        logger.info("Был вызван метод для получения сотрудника с id = " + id);
+        LOGGER.info("Был вызван метод для получения сотрудника с id = {}", id);
         Optional<Employee> employeeOptional = employeeBDRepository.findById(id);
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         return employeeOptional.orElseThrow(() -> new IncorrectResultSizeDataAccessException(id));
     }
 
     @Override
     public List<Employee> getEmployeeWithPaging(int pageIndex, int unitPerPage) {
-        logger.info("Был вызван метод для получения информации о сотрудниках из страницы = " + pageIndex);
+        LOGGER.info("Был вызван метод для получения информации о сотрудниках из страницы = {}", pageIndex);
         Pageable employeeOfConcretePage = PageRequest.of(pageIndex, unitPerPage);
         Page<Employee> page = employeeBDRepository.findAll(employeeOfConcretePage);
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         return page.stream().toList();
     }
 
     public Employee getEmployeeWithHighestSalary() {
-        logger.info("Был вызван метод для получения сотрудника с самой высокой зарплатой");
+        LOGGER.info("Был вызван метод для получения сотрудника с самой высокой зарплатой");
         return employeeBDRepository.getEmployeeWithHighestSalary();
     }
 
     @Override
     public void upload(MultipartFile jsonFile) throws IOException {
-        logger.info("Был вызван метод для получения списка сотрудников и сохранения их в базе данных");
+        LOGGER.info("Был вызван метод для получения списка сотрудников и сохранения их в базе данных");
         String fileName = jsonFile.getName();
         String jsonContent = UtilitiesMethods.readTextFromFile(fileName);
         ObjectMapper objectMapper = new ObjectMapper();
         EmployeeDTO employeeDTO = objectMapper.readValue(jsonContent, EmployeeDTO.class);
         List<Employee> employeeList = List.of(employeeDTO.toEmployee());
-        logger.debug("Успешно");
+        LOGGER.debug("Успешно");
         employeeBDRepository.saveAll(employeeList);
     }
 

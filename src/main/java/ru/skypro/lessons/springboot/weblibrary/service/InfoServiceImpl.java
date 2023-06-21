@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class InfoServiceImpl implements InfoService {
 
-    private static final Logger logger = LoggerFactory.getLogger(InfoServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InfoServiceImpl.class);
 
     @Value("${app.env}")
     private String info;
 
     public String getInfo() {
-        logger.info("Был запущен метод вывода информации о профиле");
+        LOGGER.info("Был запущен метод вывода информации о профиле");
         return info;
     }
 
