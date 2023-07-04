@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changesets/22062023_create_tables.yml
