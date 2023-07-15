@@ -1,125 +1,85 @@
 package ru.skypro.lessons.springboot.weblibrary.repository;
 import org.springframework.stereotype.Repository;
-import ru.skypro.lessons.springboot.weblibrary.model.Employee;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeNoBD;
+import ru.skypro.lessons.springboot.weblibrary.dto.PositionNoBD;
+
 import java.util.*;
+
+import static java.util.Comparator.comparingInt;
 
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
+     List<EmployeeNoBD> employeeList = List.of(
+            new EmployeeNoBD(1, "Санёк", 94_000, new PositionNoBD(1, "Рабочий")),
+            new EmployeeNoBD(2, "Дикий", 175_000, new PositionNoBD(2,"Рабочий")),
+            new EmployeeNoBD(3, "Алексей", 45_000, new PositionNoBD(3,"Рабочий")),
+            new EmployeeNoBD(4, "Алёна", 106_000, new PositionNoBD(4,"Рабочий")));
+
+
     @Override
     public Integer getSumSalary() {
-        return null;
+        List<Integer> salary = new ArrayList<>();
+        for (EmployeeNoBD employeeNoBD : employeeList)
+            salary.add(employeeNoBD.getSalary());
+        return salary.stream().mapToInt(Integer::intValue).sum();
     }
-
     @Override
-    public Employee getMinSalary() {
-        return null;
+    public EmployeeNoBD getMinSalary() {
+        return employeeList.stream()
+                .min(comparingInt(EmployeeNoBD::getSalary))
+                .get();
     }
-
     @Override
-    public Employee getMaxSalary() {
-        return null;
+    public EmployeeNoBD getMaxSalary() {
+        return employeeList.stream()
+                .max(comparingInt(EmployeeNoBD::getSalary))
+                .get();
     }
-
     @Override
-    public List<Employee> getHighSalary() {
-        return null;
+    public List<EmployeeNoBD> getHighSalary() {
+        List<Integer> salary = new ArrayList<>();
+        for (EmployeeNoBD employee : employeeList)
+            salary.add(employee.getSalary());
+        List<EmployeeNoBD> employees = new ArrayList<>();
+        for (EmployeeNoBD employee : employeeList)
+            if(employee.getSalary() > salary.stream()
+                .mapToInt(a -> a)
+                .average().orElse(0)){
+                employees.add(employee);
+            }
+        return employees;
     }
-
-    @Override
-    public void createEmployee(Employee employee) {
+    public void createEmployee(EmployeeNoBD employee){
+                employeeList.add(employee);
     }
-
-    @Override
-    public List<Employee> editEmployee(Integer id, String name, Integer salary) {
-        return null;
+    public List<EmployeeNoBD> editEmployee(Integer id, String name, Integer salary) {
+    for (EmployeeNoBD item : employeeList) {
+        if (Objects.equals(id, item.getId())) {
+            item.setName(name);
+            item.setSalary(salary);
+        }
     }
-
-    @Override
-    public Employee getEmployeeByID(Integer id) {
-        return null;
+    return employeeList;
     }
-
-    @Override
+    public EmployeeNoBD getEmployeeByID(Integer id) {
+        EmployeeNoBD employee = new EmployeeNoBD();
+        for (EmployeeNoBD empl : employeeList) {
+            if (Objects.equals(id, empl.getId()))
+                employee = empl;
+        }
+        return employee;
+    }
     public void deleteEmployeeByID(Integer id) {
-
+        employeeList.removeIf(employee -> Objects.equals(employee.getId(), id));
     }
-
-    @Override
-    public List<Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary) {
-        return null;
+    public List<EmployeeNoBD> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary) {
+        List<EmployeeNoBD> employees = new ArrayList<>();
+        for (EmployeeNoBD employee : employeeList) {
+            if(employee.getSalary() > salary) {
+                employees.add(employee);
+            }
+        }
+        return employees;
     }
-
-//     List<Employee> employeeList = List.of(
-//            new Employee(1, "Санёк", 94_000, new Position(1, "Рабочий")),
-//            new Employee(2, "Дикий", 175_000, "Рабочий"),
-//            new Employee(3, "Алексей", 45_000, "Рабочий"),
-//            new Employee(4, "Алёна", 106_000, "Рабочий"));
-//
-//
-//    @Override
-//    public Integer getSumSalary() {
-//        List<Integer> salary = new ArrayList<>();
-//        for (Employee employee : employeeList)
-//            salary.add(employee.getSalary());
-//        return salary.stream().mapToInt(Integer::intValue).sum();
-//    }
-//    @Override
-//    public Employee getMinSalary() {
-//        return employeeList.stream()
-//                .min(comparingInt(Employee::getSalary))
-//                .get();
-//    }
-//    @Override
-//    public Employee getMaxSalary() {
-//        return employeeList.stream()
-//                .max(comparingInt(Employee::getSalary))
-//                .get();
-//    }
-//    @Override
-//    public List <Employee> getHighSalary() {
-//        List<Integer> salary = new ArrayList<>();
-//        for (Employee employee : employeeList)
-//            salary.add(employee.getSalary());
-//        List<Employee> employees = new ArrayList<>();
-//        for (Employee employee : employeeList)
-//            if(employee.getSalary() > salary.stream()
-//                .mapToInt(a -> a)
-//                .average().orElse(0)){
-//                employees.add(employee);
-//            }
-//        return employees;
-//    }
-//    public void createEmployee(Employee employee){
-//                employeeList.add(employee);
-//    }
-//    public List<Employee> editEmployee(Integer id, String name, Integer salary) {
-//    for (Employee item : employeeList) {
-//        if (id == item.getId()) {
-//            item.setName(name);
-//            item.setSalary(salary);
-//        }
-//    }
-//    return employeeList;
-//    }
-//    public Employee getEmployeeByID(Integer id) {
-//        Employee employee = new Employee();
-//        for (Employee empl : employeeList) {
-//            if (id == empl.getId())
-//                employee = empl;
-//        }
-//        return employee;
-//    }
-//    public void deleteEmployeeByID(Integer id) {
-//        employeeList.removeIf(employee -> employee.getId() == id);
-//    }
-//    public List <Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(Integer salary) {
-//        List<Employee> employees = new ArrayList<>();
-//        for (Employee employee : employeeList) {
-//            if(employee.getSalary() > salary) {
-//                employees.add(employee);
-//            }
-//        }
-//        return employees;
-//    }
 }

@@ -23,12 +23,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: position_id
+                  name: department
                   type: int
                   constraints:
                     nullable: false
               - column:
-                  name: department
+                  name: position_id
                   type: int
                   constraints:
                     nullable: false
@@ -46,3 +46,9 @@ databaseChangeLog:
                   type: varchar
                   constraints:
                     nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: employee
+            baseColumnNames: position_id
+            constraintName: FK_EMPLOYEE_POSITION_ID
+            referencedTableName: position
+            referencedColumnNames: id
