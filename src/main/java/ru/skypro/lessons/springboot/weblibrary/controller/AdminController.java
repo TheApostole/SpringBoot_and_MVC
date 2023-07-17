@@ -4,8 +4,9 @@ import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeNoBD;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
-import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 import java.io.IOException;
@@ -22,12 +23,12 @@ public class AdminController {
     private final EmployeeBDService employeeBDService;
 
     @PostMapping
-    public void createEmployee(@RequestBody Employee employee) {
+    public void createEmployee(@RequestBody EmployeeNoBD employee) {
         employeeService.createEmployee(employee);
     }
 
     @PutMapping("/{id}")
-    public List<Employee> editEmployee(@PathVariable Integer id,@PathVariable String name,@PathVariable Integer salary) {
+    public List<EmployeeNoBD> editEmployee(@PathVariable Integer id,@PathVariable String name,@PathVariable Integer salary) {
         return employeeService.editEmployee(id, name, salary);
     }
 
@@ -37,7 +38,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void create(@RequestParam("file") MultipartFile file) throws IOException {
+    public void create(@RequestParam("file") Class<MultipartFile> file) throws IOException {
         employeeBDService.upload(file);
     }
 
@@ -47,27 +48,27 @@ public class AdminController {
     }
 
     @GetMapping("/salary/min")
-    public Employee getMinSalary() {
+    public EmployeeNoBD getMinSalary() {
         return employeeService.getMinSalary();
     }
 
     @GetMapping("/salary/max")
-    public Employee getMaxSalary() {
+    public EmployeeNoBD getMaxSalary() {
         return employeeService.getMaxSalary();
     }
 
     @GetMapping("/high-salary")
-    public List<Employee> getHighSalary() {
+    public List<EmployeeNoBD> getHighSalary() {
         return employeeService.getHighSalary();
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeByID(@PathVariable Integer id) {
+    public EmployeeNoBD getEmployeeByID(@PathVariable Integer id) {
         return employeeService.getEmployeeByID(id);
     }
 
     @GetMapping("/salaryHigherThan")
-    public List<Employee> getEmployeesWhoseSalaryIsHigherThanTheParameter(@RequestParam("salary") Integer salary) {
+    public List<EmployeeNoBD> getEmployeesWhoseSalaryIsHigherThanTheParameter(@RequestParam("salary") Integer salary) {
         return employeeService.getEmployeesWhoseSalaryIsHigherThanTheParameter(salary);
     }
 
@@ -77,12 +78,12 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public Position getEmployeeByPositionName(@RequestParam String name) {
+    public List<Employee> getEmployeeByPositionName(@RequestParam String name) {
         return employeeBDService.getEmployeeByPositionName(name);
     }
 
     @GetMapping("/{id}/fullInfo")
-    public Employee getEmployeesById(@PathVariable int id) {
+    public EmployeeDTO getEmployeesById(@PathVariable int id) {
         return employeeBDService.getEmployeeById(id);
     }
 

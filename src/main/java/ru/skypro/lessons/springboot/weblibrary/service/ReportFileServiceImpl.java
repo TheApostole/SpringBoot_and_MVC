@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
-import ru.skypro.lessons.springboot.weblibrary.model.report.Report;
-import ru.skypro.lessons.springboot.weblibrary.model.report.ReportFile;
+import ru.skypro.lessons.springboot.weblibrary.dto.Report;
+import ru.skypro.lessons.springboot.weblibrary.model.ReportFile;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.ReportFileRepository;
 import ru.skypro.lessons.springboot.weblibrary.util.UtilitiesMethods;
@@ -50,5 +50,4 @@ public class ReportFileServiceImpl implements ReportFileService {
         LOGGER.debug("Успешно");
         return someFile.getFileName();
     }
-
 }

@@ -23,7 +23,8 @@ public class Position {
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     private List<Employee> employeeList;
 
-    public Position() {
-    }
 
+    public Position(int i, String рабочий) {
+
+    }
 }

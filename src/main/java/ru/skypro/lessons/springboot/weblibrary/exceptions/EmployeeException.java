@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class EmployeeException {
 
-    @ExceptionHandler
+    @ExceptionHandler(EmployeeNotFoundExceptions.class)
     public ResponseEntity<?> handleException(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }

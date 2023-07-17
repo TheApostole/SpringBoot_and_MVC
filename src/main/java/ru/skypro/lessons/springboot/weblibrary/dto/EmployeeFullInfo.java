@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.weblibrary.model.projections;
+package ru.skypro.lessons.springboot.weblibrary.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
