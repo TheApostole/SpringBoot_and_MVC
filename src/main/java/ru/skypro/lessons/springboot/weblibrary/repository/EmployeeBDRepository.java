@@ -1,14 +1,10 @@
 package ru.skypro.lessons.springboot.weblibrary.repository;
-import jakarta.persistence.Tuple;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
-import ru.skypro.lessons.springboot.weblibrary.model.Position;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeBDRepository extends CrudRepository<Employee, Integer> {

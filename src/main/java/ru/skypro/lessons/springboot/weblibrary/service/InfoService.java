@@ -1,5 +1,5 @@
-package ru.skypro.lessons.springboot.weblibrary.service;
-
-public interface InfoService {
-    String getInfo();
-}
+//package ru.skypro.lessons.springboot.weblibrary.service;
+//
+//public interface InfoService {
+//    String getInfo();
+//}

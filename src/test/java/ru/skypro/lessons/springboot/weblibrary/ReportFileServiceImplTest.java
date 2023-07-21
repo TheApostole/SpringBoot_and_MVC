@@ -6,19 +6,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundExceptions;
-import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.ReportFile;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
-import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.ReportFileRepository;
 import ru.skypro.lessons.springboot.weblibrary.service.ReportFileServiceImpl;
-
-import java.io.IOException;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
