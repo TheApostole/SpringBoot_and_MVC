@@ -11,6 +11,6 @@ public interface EmployeeBDService {
     List<Employee> getEmployeeByPositionName(String name);
     EmployeeDTO getEmployeeById(int id);
     List<Employee> getEmployeeWithPaging(int pageIndex, int unitPerPage);
-    void upload(Class<MultipartFile> resource) throws IOException;
-
+    void upload(MultipartFile file) throws IOException;
+    Employee addEmployee(EmployeeDTO employeeDTO);
 }

@@ -14,7 +14,7 @@ public class ReportController {
 
     private final ReportFileService reportFileService;
 
-    @PostMapping("/")
+    @PostMapping
     public Long generatesAndSavesJsonFile() throws IOException {
         return reportFileService.generatesAndSavesJsonFile();
     }

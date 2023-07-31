@@ -12,6 +12,7 @@ import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundExcept
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
 import ru.skypro.lessons.springboot.weblibrary.util.UtilitiesMethods;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class EmployeeBDServiceImpl implements EmployeeBDService {
     public List<Employee> getEmployeeWithPaging(int pageIndex, int unitPerPage) {
         LOGGER.info("Был вызван метод для получения информации о сотрудниках из страницы = {}", pageIndex);
         Pageable employeeOfConcretePage = PageRequest.of(pageIndex, unitPerPage);
-        return employeeBDRepository.findAll(employeeOfConcretePage).stream().toList();
+       return employeeBDRepository.findAll(employeeOfConcretePage).stream().toList();
     }
 
     public Employee getEmployeeWithHighestSalary() {
@@ -49,7 +50,7 @@ public class EmployeeBDServiceImpl implements EmployeeBDService {
     }
 
     @Override
-    public void upload(Class<MultipartFile> jsonFile) throws IOException {
+    public void upload(MultipartFile jsonFile) throws IOException {
         LOGGER.info("Был вызван метод для получения списка сотрудников и сохранения их в базе данных");
         String fileName = jsonFile.getName();
         String jsonContent = UtilitiesMethods.readTextFromFile(fileName);
@@ -58,6 +59,10 @@ public class EmployeeBDServiceImpl implements EmployeeBDService {
         List<Employee> employeeList = List.of(employeeDTO.toEmployee());
         employeeBDRepository.saveAll(employeeList);
         LOGGER.debug("Успешно");
+    }
+    @Override
+    public Employee addEmployee(EmployeeDTO employeeDTO) {
+        return employeeBDRepository.save(employeeDTO.toEmployee());
     }
 
 }

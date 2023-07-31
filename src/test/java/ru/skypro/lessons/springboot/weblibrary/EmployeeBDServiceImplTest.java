@@ -8,7 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundExceptions;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
@@ -67,7 +68,11 @@ public class EmployeeBDServiceImplTest {
     @SneakyThrows
     @Test
     public void uploadNegativeTest () {
-        Class<MultipartFile> multipartFile = MultipartFile.class;
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "fileEmployees",
+                "employees.json",
+                MediaType.APPLICATION_JSON_VALUE,
+                EmployeeControllerTest.class.getResourceAsStream("/employees.json"));
         lenient().doThrow(EmployeeNotFoundExceptions.class)
                 .when(employeeBDRepository).saveAll(anyList());
         assertThrows(IOException.class, ()-> employeeBDService.upload(multipartFile));

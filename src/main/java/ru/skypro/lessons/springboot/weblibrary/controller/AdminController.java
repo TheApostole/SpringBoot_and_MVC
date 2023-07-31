@@ -9,6 +9,7 @@ import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeNoBD;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDService;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class AdminController {
     public void createEmployee(@RequestBody EmployeeNoBD employee) {
         employeeService.createEmployee(employee);
     }
-
     @PutMapping("/{id}")
     public List<EmployeeNoBD> editEmployee(@PathVariable Integer id,@PathVariable String name,@PathVariable Integer salary) {
         return employeeService.editEmployee(id, name, salary);
@@ -38,8 +38,8 @@ public class AdminController {
     }
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void create(@RequestParam("file") Class<MultipartFile> file) throws IOException {
-        employeeBDService.upload(file);
+    public void create(@RequestParam("fileEmployees") MultipartFile fileEmployees) throws IOException {
+        employeeBDService.upload(fileEmployees);
     }
 
     @GetMapping("/salary/sum")
@@ -62,7 +62,7 @@ public class AdminController {
         return employeeService.getHighSalary();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/get")
     public EmployeeNoBD getEmployeeByID(@PathVariable Integer id) {
         return employeeService.getEmployeeByID(id);
     }
@@ -77,7 +77,7 @@ public class AdminController {
         return employeeBDService.getEmployeeWithHighestSalary();
     }
 
-    @GetMapping("/")
+    @GetMapping("/pos")
     public List<Employee> getEmployeeByPositionName(@RequestParam String name) {
         return employeeBDService.getEmployeeByPositionName(name);
     }
@@ -90,6 +90,10 @@ public class AdminController {
     @GetMapping("/page")
     public List<Employee> getEmployeeWithPaging(@RequestParam int pageIndex,@RequestParam int unitPerPage) {
         return employeeBDService.getEmployeeWithPaging(pageIndex, unitPerPage);
+    }
+    @PostMapping("/add")
+    public Employee addEmployee (@RequestBody EmployeeDTO employeeDTO){
+        return employeeBDService.addEmployee(employeeDTO);
     }
 
 }
