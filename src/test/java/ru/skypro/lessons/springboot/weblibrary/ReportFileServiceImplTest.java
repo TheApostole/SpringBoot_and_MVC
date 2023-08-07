@@ -10,6 +10,9 @@ import ru.skypro.lessons.springboot.weblibrary.model.ReportFile;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.ReportFileRepository;
 import ru.skypro.lessons.springboot.weblibrary.service.ReportFileServiceImpl;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -26,7 +29,7 @@ public class ReportFileServiceImplTest {
 
     @SneakyThrows
     @Test
-    public void generatesAndSavesJsonFileTestOnTheReturnedResultAndToTheMethodCall() {
+    public void generatesAndSavesJsonFileTestOnTheReturnedResultAndToTheMethodCall() throws IOException {
         Integer expected = 0;
         ReportFile reportFile = new ReportFile();
         lenient().when(employeeBDRepository.sortDepartment())

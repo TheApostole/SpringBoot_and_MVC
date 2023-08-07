@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundExceptions;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
+import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeBDRepository;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeBDServiceImpl;
 import java.io.IOException;
@@ -60,14 +61,14 @@ public class EmployeeBDServiceImplTest {
 
     @Test
     public void getEmployeeWithHighestSalaryTestWhenTheResultIsReturned () {
-        Employee employee = new Employee();
+        Employee employee = new Employee(1, "Санёк", 94_000, new Position("Рабочий"));
         lenient().when(employeeBDRepository.findAll())
                 .thenReturn(Collections.singleton(employee));
     }
 
     @SneakyThrows
     @Test
-    public void uploadNegativeTest () {
+    public void uploadNegativeTest () throws IOException {
         MockMultipartFile multipartFile = new MockMultipartFile(
                 "fileEmployees",
                 "employees.json",

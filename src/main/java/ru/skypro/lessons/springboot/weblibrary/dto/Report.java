@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 
 public class Report {
 
@@ -15,4 +14,11 @@ public class Report {
     private Integer minimumWage;
     private Integer averageSalary;
 
+    public Report(Integer department, Integer numberOfEmployees, Integer maximumSalary, Integer minimumWage, Integer averageSalary) {
+        this.department = department;
+        this.numberOfEmployees = numberOfEmployees;
+        this.maximumSalary = maximumSalary;
+        this.minimumWage = minimumWage;
+        this.averageSalary = averageSalary;
+    }
 }

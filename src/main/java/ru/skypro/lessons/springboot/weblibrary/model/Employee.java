@@ -30,7 +30,6 @@ public class Employee {
     @Column(name = "department")
     private Integer department;
 
-    public Employee() {
+    public Employee(int i, String санёк, int i1, Position рабочий) {
     }
-
 }
