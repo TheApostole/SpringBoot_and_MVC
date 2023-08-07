@@ -31,7 +31,7 @@ public class EmployeeDTO implements Serializable {
 
     public Employee toEmployee() {
 
-        Employee employee = new Employee();
+        Employee employee = new Employee(1, "Санёк", 94_000, new Position("Рабочий"));
         employee.setId(this.getId());
         employee.setName(this.getName());
         employee.setSalary(this.getSalary());

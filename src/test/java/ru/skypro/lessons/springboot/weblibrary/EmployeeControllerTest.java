@@ -168,8 +168,8 @@ public class EmployeeControllerTest {
     void getEmployeeByPositionNameTest() throws Exception{
 
         List<Employee> employeeList = List.of(
-                new Employee(1, "Санёк", 94_000, new Position(1, "Рабочий"),1),
-                new Employee(1, "Санёк", 94_000, new Position(1, "Рабочий"),1)
+                new Employee(1, "Санёк", 94_000, new Position( "Рабочий")),
+                new Employee(1, "Санёк", 94_000, new Position("Рабочий"))
         );
 
         mockMvc.perform(MockMvcRequestBuilders.get("/admin/employees/pos")
@@ -181,8 +181,8 @@ public class EmployeeControllerTest {
     void getEmployeeWithPagingTest() throws Exception{
 
         List<Employee> employeeList = List.of(
-                new Employee(1, "Санёк", 94_000, new Position(1, "Рабочий"),1),
-                new Employee(1, "Санёк", 94_000, new Position(1, "Рабочий"),1)
+                new Employee(1, "Санёк", 94_000, new Position("Рабочий")),
+                new Employee(1, "Санёк", 94_000, new Position("Рабочий"))
         );
 
         mockMvc.perform(MockMvcRequestBuilders.get("/admin/employees/page")
